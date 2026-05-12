@@ -423,6 +423,308 @@
     }
     .toast.on { transform: translateX(-50%) translateY(0); }
 
+    /* ── Calendário de frutas ── */
+    .cal-view { display: none; }
+    .cal-view.active { display: block; }
+
+    .cal-intro {
+      font-size: 15px;
+      color: var(--folha);
+      margin-bottom: 20px;
+      padding: 12px 16px;
+      background: var(--cl);
+      border-radius: var(--rs);
+      border-left: 3px solid var(--arbusto);
+      font-style: italic;
+    }
+
+    .cal-grid {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      box-shadow: var(--sh);
+      overflow-x: auto;
+      padding: 4px;
+    }
+    .cal-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 3px;
+      min-width: 760px;
+      font-family: var(--f-serif);
+    }
+    .cal-table th, .cal-table td {
+      padding: 0;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .cal-th-mes {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--gy);
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 8px 0 10px !important;
+    }
+    .cal-th-mes.current {
+      color: var(--folha);
+    }
+    .cal-th-mes.current::after {
+      content: '';
+      display: block;
+      width: 18px;
+      height: 2px;
+      background: var(--arbusto);
+      margin: 4px auto 0;
+      border-radius: 2px;
+    }
+    .cal-th-fruta {
+      text-align: left !important;
+      padding: 10px 14px !important;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--folha);
+      cursor: pointer;
+      border-radius: var(--rs);
+      transition: background .15s;
+      white-space: nowrap;
+    }
+    .cal-th-fruta:hover { background: var(--cl-soft); }
+    .cal-th-fruta .cal-dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 8px;
+      vertical-align: middle;
+    }
+
+    .cal-cell {
+      height: 34px;
+      min-width: 48px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: transform .12s, box-shadow .12s, outline-color .12s;
+      outline: 2px solid transparent;
+      outline-offset: -2px;
+    }
+    .cal-cell:hover {
+      transform: scale(1.06);
+      box-shadow: 0 2px 8px rgba(43,71,30,.18);
+    }
+    .cal-col-current .cal-cell {
+      outline-color: rgba(85,137,58,.55);
+    }
+    .cal-cell-confirm {
+      background: repeating-linear-gradient(45deg, #E5DCC4 0 6px, #F1E9D2 6px 12px);
+    }
+
+    .cal-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 22px;
+      margin-top: 20px;
+      padding: 14px 18px;
+      background: var(--cl-soft);
+      border-radius: var(--rs);
+      font-size: 13.5px;
+      color: var(--folha);
+    }
+    .cal-legend-item { display: flex; align-items: center; gap: 8px; }
+    .cal-legend-swatch {
+      width: 18px;
+      height: 14px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      border: 1px solid rgba(0,0,0,.05);
+    }
+
+    /* Detalhe da fruta */
+    .cal-detail-hd {
+      display: flex;
+      align-items: flex-start;
+      gap: 18px;
+      padding: 18px 22px;
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-left: 5px solid var(--arbusto);
+      border-radius: var(--r);
+      margin-bottom: 18px;
+      box-shadow: var(--sh);
+    }
+    .cal-detail-bullet {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .cal-detail-meta { flex: 1; }
+    .cal-detail-meta h2 {
+      font-family: var(--f-serif);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--folha);
+      margin-bottom: 6px;
+      letter-spacing: -.2px;
+    }
+    .cal-detail-meta p {
+      font-size: 15px;
+      color: var(--gy);
+      line-height: 1.5;
+      font-style: italic;
+    }
+
+    .cal-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--wh);
+      color: var(--folha);
+      border: 1.5px solid var(--bd);
+      border-radius: var(--rs);
+      font-family: var(--f-serif);
+      font-size: 14.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+      margin-bottom: 18px;
+    }
+    .cal-back:hover {
+      border-color: var(--arbusto);
+      color: var(--arbusto);
+      background: var(--cl-soft);
+    }
+
+    .cal-frutas-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+    .cal-frutas-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--bd);
+      background: var(--wh);
+      color: var(--gy);
+      font-family: var(--f-serif);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .cal-frutas-tab:hover { border-color: var(--arbusto); color: var(--folha); }
+    .cal-frutas-tab.active { background: var(--folha); color: var(--marfim); border-color: var(--folha); }
+    .cal-frutas-tab .cal-dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+    .cal-meses {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .cal-mes-card {
+      background: var(--wh);
+      border: 1px solid var(--bd);
+      border-radius: var(--r);
+      padding: 14px 16px;
+      box-shadow: var(--sh);
+      position: relative;
+      overflow: hidden;
+    }
+    .cal-mes-card.current {
+      border-color: var(--arbusto);
+      border-width: 2px;
+      padding: 13px 15px;
+    }
+    .cal-mes-card .cal-status-bar {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+    }
+    .cal-mes-card.confirm .cal-status-bar {
+      background: repeating-linear-gradient(45deg, #E5DCC4 0 6px, #F1E9D2 6px 12px);
+    }
+    .cal-mes-hd {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin: 4px 0 8px;
+      gap: 10px;
+    }
+    .cal-mes-nome {
+      font-family: var(--f-serif);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--folha);
+    }
+    .cal-mes-nome .cur-tag {
+      font-size: 11px;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--arbusto);
+      margin-left: 6px;
+      letter-spacing: .3px;
+    }
+    .cal-mes-label {
+      font-size: 12.5px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+    .cal-mes-preco {
+      font-size: 14px;
+      color: var(--terra);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .cal-mes-preco.muted { color: var(--gy); font-weight: 400; font-style: italic; }
+    .cal-mes-nota {
+      font-size: 13.5px;
+      color: var(--gy);
+      line-height: 1.5;
+    }
+
+    /* ── Focus states — acessibilidade por teclado ── */
+    :focus-visible { outline: 2px solid var(--arbusto); outline-offset: 2px; }
+    .nav-btn:focus-visible { outline: 2px solid var(--broto); outline-offset: -3px; border-radius: 6px; }
+
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute; top: -100px; left: 16px;
+      padding: 10px 18px; background: var(--folha); color: var(--marfim);
+      border-radius: 0 0 var(--rs) var(--rs);
+      font-family: var(--f-serif); font-size: 14px; font-weight: 600;
+      z-index: 9999; transition: top .15s; text-decoration: none;
+    }
+    .skip-link:focus { top: 0; }
+
+    /* ── Touch targets mínimos ── */
+    .nav-btn { min-height: 44px; }
+    .copy-btn { min-height: 40px; }
+    .cal-cell { min-width: 44px; min-height: 40px; }
+    .hamburger { min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
+
+    /* ── Calendário — scroll hint ── */
+    .cal-scroll-wrap { position: relative; }
+    .cal-scroll-wrap::after {
+      content: ''; display: none; position: absolute;
+      top: 0; right: 0; bottom: 0; width: 36px;
+      background: linear-gradient(to right, transparent, rgba(255,249,235,.85));
+      pointer-events: none; border-radius: 0 var(--r) var(--r) 0;
+    }
+
+    /* ── Calendário — hover em linha inteira ── */
+    .cal-table tbody tr:hover .cal-th-fruta { color: var(--arbusto); }
+    .cal-table tbody tr:hover .cal-cell:not(.cal-cell-confirm) { filter: brightness(1.06); }
+
     /* ── Responsive ── */
     @media (max-width: 768px) {
       body { font-size: 16px; }
@@ -435,11 +737,27 @@
       .stage-title { font-size: 26px; }
       .trig-grid { grid-template-columns: repeat(2, 1fr); }
       .rules-grid, .exp-grid { grid-template-columns: 1fr; }
+      .cal-meses { grid-template-columns: 1fr; }
+      .cal-frutas-tabs { gap: 6px; }
+      .cal-frutas-tab { font-size: 13px; padding: 6px 12px; }
+      .cal-scroll-wrap::after { display: block; }
+      .cal-back {
+        position: sticky; top: 56px; z-index: 50;
+        background: rgba(255,249,235,.95);
+        backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+        border-bottom: 1px solid var(--bd); border-radius: 0;
+        width: 100%; margin-bottom: 16px; padding: 12px 18px;
+      }
+    }
+    @media (max-width: 480px) {
+      .trig-grid { grid-template-columns: 1fr; }
+      .stage-title { font-size: 22px; gap: 8px; }
     }
   </style>
 </head>
 <body>
 
+<a href="#content" class="skip-link">Ir para o conteúdo</a>
 <div class="overlay" id="overlay" onclick="closeSB()"></div>
 
 <div class="app">
@@ -457,7 +775,7 @@
       <div class="brand-sub">Manual WhatsApp</div>
     </div>
     <nav class="sb-nav" id="sb-nav"></nav>
-    <div class="sb-foot">Atualizado · maio de 2026 · v2</div>
+    <div class="sb-foot">Atualizado · maio de 2026 · v3</div>
   </aside>
 
   <main class="main">
@@ -915,6 +1233,238 @@ const SCRIPTS = {
 };
 
 // =============================================================
+//  CALENDÁRIO DE FRUTAS
+//  Para adicionar uma fruta nova: basta acrescentar um objeto
+//  ao array FRUTAS abaixo. Zero mudança no resto do código.
+// =============================================================
+const FRUTAS = [
+  {
+    id: "morango",
+    nome: "Morango",
+    cor: "#E8394A",
+    descricao: "Cultivado em Brazlândia/DF. Safra de inverno, os meses mais frios produzem os frutos mais doces, firmes e aromáticos do ano.",
+    meses: [
+      { mes: "Jan", status: "entressafra",  label: "Entressafra",     preco: "R$ 35–55/kg", nota: "Sem produção local. Produto vem de SP/MG com shelf-life reduzido." },
+      { mes: "Fev", status: "entressafra",  label: "Entressafra",     preco: "R$ 40–60/kg", nota: "Pior mês para o morango no cerrado. Calor máximo e chuvas diárias." },
+      { mes: "Mar", status: "entressafra",  label: "Entressafra",     preco: "alto",        nota: "Produtores aguardam chegada de mudas. Início do planejamento da safra." },
+      { mes: "Abr", status: "plantio",      label: "Plantio",         preco: "alto",        nota: "Janela ideal de plantio (15/abr a 30/mai). Primeiras colheitas em jul/ago." },
+      { mes: "Mai", status: "plantio",      label: "Plantio",         preco: "alto",        nota: "Temperatura cai em Brazlândia. Diferencial térmico induz floração." },
+      { mes: "Jun", status: "inicio_safra", label: "Início de safra", preco: "R$ 25–35/kg", nota: "Primeiros frutos de campo aberto. Volume irregular, seleção rigorosa." },
+      { mes: "Jul", status: "pico",         label: "Safra plena",     preco: "R$ 20–30/kg", nota: "Clima ideal: frio seco. Fruto mais doce, firme e colorido do ano." },
+      { mes: "Ago", status: "pico",         label: "Pico máximo",     preco: "R$ 20–28/kg", nota: "Maior produção e melhor qualidade. Festa do Morango de Brazlândia." },
+      { mes: "Set", status: "pico",         label: "Safra plena",     preco: "R$ 15–25/kg", nota: "Primeiras chuvas aumentam risco de Botrytis. Volume cai na 2ª quinzena." },
+      { mes: "Out", status: "fim_safra",    label: "Fim de safra",    preco: "R$ 25–40/kg", nota: "Queda rápida de volume. Apenas cultivo protegido segue produzindo." },
+      { mes: "Nov", status: "entressafra",  label: "Entressafra",     preco: "R$ 35–55/kg", nota: "Alta demanda natalina com produto escasso. Maior margem do ano." },
+      { mes: "Dez", status: "entressafra",  label: "Entressafra",     preco: "R$ 40–60/kg", nota: "Pico de demanda natalina. Disponibilidade mínima. Produto de estufa." }
+    ]
+  },
+  {
+    id: "mirtilo",
+    nome: "Mirtilo",
+    cor: "#3B4F9E",
+    descricao: "Produto principal da Inatú. Colhido com pruína intacta, sinal de frescor e baixo manuseio.",
+    meses: [
+      { mes: "Jan", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Fev", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Mar", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Abr", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Mai", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Jun", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Jul", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Ago", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Set", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Out", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Nov", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." },
+      { mes: "Dez", status: "a_confirmar", label: "A confirmar", preco: null, nota: "Dados de sazonalidade a levantar com produtor parceiro." }
+    ]
+  },
+  {
+    id: "framboesa",
+    nome: "Framboesa",
+    cor: "#C2385A",
+    descricao: "Safra curta. Produto delicado, não suporta empilhamento. Disponível em janelas limitadas ao longo do ano.",
+    meses: [
+      { mes: "Jan", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local." },
+      { mes: "Fev", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local." },
+      { mes: "Mar", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local." },
+      { mes: "Abr", status: "pico",        label: "Safra",        preco: null, nota: "Safra confirmada em abril/2026 com bom resultado comercial." },
+      { mes: "Mai", status: "fim_safra",   label: "Fim de safra", preco: null, nota: "Safra encerra. Janela de 2 a 3 semanas a partir de meados de abril." },
+      { mes: "Jun", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local." },
+      { mes: "Jul", status: "a_confirmar", label: "A confirmar",  preco: null, nota: "Dados de segunda safra a confirmar com produtor." },
+      { mes: "Ago", status: "a_confirmar", label: "A confirmar",  preco: null, nota: "Dados a confirmar." },
+      { mes: "Set", status: "a_confirmar", label: "A confirmar",  preco: null, nota: "Dados a confirmar." },
+      { mes: "Out", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local confirmado." },
+      { mes: "Nov", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local confirmado." },
+      { mes: "Dez", status: "entressafra", label: "Entressafra",  preco: null, nota: "Sem produto local confirmado." }
+    ]
+  },
+  {
+    id: "abacaxi",
+    nome: "Abacaxi",
+    cor: "#C89A1A",
+    descricao: "Fruta tropical com safra principal no primeiro semestre. Cultivado no Centro-Oeste e regiões tropicais do Brasil. Oportunidade de portfólio identificada na reunião de produto de maio/2026.",
+    meses: [
+      { mes: "Jan", status: "pico",        label: "Safra plena",     preco: null, nota: "Verão brasileiro: pico de colheita nas regiões produtoras do Centro-Oeste e Norte." },
+      { mes: "Fev", status: "pico",        label: "Safra plena",     preco: null, nota: "Alta disponibilidade. Fruto com maior teor de açúcar no verão." },
+      { mes: "Mar", status: "pico",        label: "Safra plena",     preco: null, nota: "Ainda em safra plena. Boa qualidade e preço acessível no CEASA." },
+      { mes: "Abr", status: "inicio_safra",label: "Fim de safra",    preco: null, nota: "Início da queda de volume. Transição para a entressafra." },
+      { mes: "Mai", status: "entressafra", label: "Entressafra",     preco: null, nota: "Volume reduzido. Produto de segunda safra em algumas regiões." },
+      { mes: "Jun", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem safra principal. Produto importado de regiões mais quentes." },
+      { mes: "Jul", status: "entressafra", label: "Entressafra",     preco: null, nota: "Entressafra plena no Centro-Oeste." },
+      { mes: "Ago", status: "a_confirmar", label: "A confirmar",     preco: null, nota: "Segunda safra possível em alguns estados. Confirmar com fornecedor local." },
+      { mes: "Set", status: "inicio_safra",label: "Início de safra", preco: null, nota: "Início da nova safra de primavera em regiões produtoras do DF e entorno." },
+      { mes: "Out", status: "pico",        label: "Safra plena",     preco: null, nota: "Safra de primavera. Disponibilidade crescente." },
+      { mes: "Nov", status: "pico",        label: "Safra plena",     preco: null, nota: "Boa oferta. Preço mais acessível antes do pico natalino." },
+      { mes: "Dez", status: "pico",        label: "Safra plena",     preco: null, nota: "Demanda natalina alta. Fruto associado às festas de fim de ano no Brasil." }
+    ]
+  },
+  {
+    id: "lichia",
+    nome: "Lichia",
+    cor: "#A0294A",
+    descricao: "Fruta exótica com janela de safra curta e bem definida. Produção concentrada no Sul de Minas Gerais e SP. Oportunidade de portfólio premium identificada internamente.",
+    meses: [
+      { mes: "Jan", status: "pico",        label: "Pico máximo",     preco: null, nota: "Melhor momento do ano. Fruto maduro, doce e disponível em maior volume." },
+      { mes: "Fev", status: "fim_safra",   label: "Fim de safra",    preco: null, nota: "Safra encerra rapidamente. Últimas colheitas da temporada." },
+      { mes: "Mar", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Abr", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Mai", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Jun", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Jul", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Ago", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Set", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Out", status: "entressafra", label: "Entressafra",     preco: null, nota: "Sem produto nacional disponível." },
+      { mes: "Nov", status: "inicio_safra",label: "Início de safra", preco: null, nota: "Primeiras colheitas em MG e SP. Volume muito limitado, preço alto." },
+      { mes: "Dez", status: "pico",        label: "Safra plena",     preco: null, nota: "Safra plena. Demanda natalina alta. Fruto escasso e muito valorizado." }
+    ]
+  }
+];
+
+const CAL_STATUS_META = {
+  pico:         { labelLegenda: "Safra / pico",      bg: f => f.cor,                                       color: '#fff' },
+  inicio_safra: { labelLegenda: "Início / fim",      bg: f => f.cor + '80',                                color: '#000' },
+  fim_safra:    { labelLegenda: "Início / fim",      bg: f => f.cor + '80',                                color: '#000' },
+  plantio:      { labelLegenda: "Plantio",           bg: () => '#C8E6D8',                                  color: '#2B471E' },
+  entressafra:  { labelLegenda: "Entressafra",       bg: () => '#E5DCC4',                                  color: '#6B6358' },
+  a_confirmar:  { labelLegenda: "A confirmar",       bg: () => null,                                       color: '#6B6358' }
+};
+
+const MES_ATUAL = new Date().getMonth();
+
+function calCellStyle(fruta, m) {
+  const meta = CAL_STATUS_META[m.status];
+  if (!meta) return 'background:#eee';
+  const bg = meta.bg(fruta);
+  return bg ? `background:${bg}` : '';
+}
+
+function buildCalendario() {
+  const meses = FRUTAS[0].meses.map(m => m.mes);
+
+  const headerRow = `
+    <tr>
+      <th style="width:130px"></th>
+      ${meses.map((m,i) => `<th class="cal-th-mes${i===MES_ATUAL?' current':''}">${m}</th>`).join('')}
+    </tr>`;
+
+  const fruitRows = FRUTAS.map(f => `
+    <tr>
+      <td class="cal-th-fruta" onclick="calShow('detail','${f.id}')">
+        <span class="cal-dot" style="background:${f.cor}"></span>${f.nome}
+      </td>
+      ${f.meses.map((m,i) => `
+        <td class="${i===MES_ATUAL?'cal-col-current':''}">
+          <div class="cal-cell ${m.status==='a_confirmar'?'cal-cell-confirm':''}"
+               title="${f.nome} · ${m.mes}: ${m.label}"
+               style="${calCellStyle(f,m)}"
+               onclick="calShow('detail','${f.id}')"></div>
+        </td>`).join('')}
+    </tr>`).join('');
+
+  const legendItems = [
+    { swatch: 'background:var(--arbusto)',                                                                 text: 'Safra plena / pico' },
+    { swatch: 'background:var(--arbusto);opacity:.5',                                                      text: 'Início ou fim de safra' },
+    { swatch: 'background:#C8E6D8',                                                                        text: 'Plantio' },
+    { swatch: 'background:#E5DCC4',                                                                        text: 'Entressafra' },
+    { swatch: 'background:repeating-linear-gradient(45deg,#E5DCC4 0 4px,#F1E9D2 4px 8px)',                 text: 'A confirmar' }
+  ].map(l => `<div class="cal-legend-item"><span class="cal-legend-swatch" style="${l.swatch}"></span>${l.text}</div>`).join('');
+
+  const overview = `
+    <div class="cal-view active" id="cal-overview">
+      <div class="cal-intro">Visão anual da disponibilidade de frutas. Clique em uma fruta ou em qualquer célula para abrir a ficha detalhada.</div>
+      <div class="cal-scroll-wrap">
+      <div class="cal-grid">
+        <table class="cal-table">
+          <thead>${headerRow}</thead>
+          <tbody>${fruitRows}</tbody>
+        </table>
+      </div>
+      </div>
+      <div class="cal-legend">${legendItems}</div>
+    </div>`;
+
+  const details = FRUTAS.map(f => {
+    const tabs = FRUTAS.map(other => `
+      <button class="cal-frutas-tab${other.id===f.id?' active':''}" onclick="calShow('detail','${other.id}')">
+        <span class="cal-dot" style="background:${other.cor}"></span>${other.nome}
+      </button>`).join('');
+
+    const cards = f.meses.map((m,i) => {
+      const bg = CAL_STATUS_META[m.status].bg(f);
+      const labelStyle = bg
+        ? `background:${bg};color:${CAL_STATUS_META[m.status].color}`
+        : `background:var(--cl);color:var(--gy)`;
+      const barStyle = bg ? `background:${bg}` : '';
+      return `
+        <div class="cal-mes-card ${i===MES_ATUAL?'current':''} ${m.status==='a_confirmar'?'confirm':''}">
+          <div class="cal-status-bar" style="${barStyle}"></div>
+          <div class="cal-mes-hd">
+            <div class="cal-mes-nome">${m.mes}${i===MES_ATUAL?'<span class="cur-tag">mês atual</span>':''}</div>
+            <span class="cal-mes-label" style="${labelStyle}">${m.label}</span>
+          </div>
+          <div class="cal-mes-preco ${m.preco?'':'muted'}">${m.preco ? 'Preço: ' + m.preco : 'Preço a definir'}</div>
+          <div class="cal-mes-nota">${esc(m.nota)}</div>
+        </div>`;
+    }).join('');
+
+    return `
+      <div class="cal-view" id="cal-detail-${f.id}">
+        <button class="cal-back" onclick="calShow('overview')">← Voltar ao calendário</button>
+        <div class="cal-detail-hd">
+          <div class="cal-detail-bullet" style="background:${f.cor}"></div>
+          <div class="cal-detail-meta">
+            <h2>${f.nome}</h2>
+            <p>${esc(f.descricao)}</p>
+          </div>
+        </div>
+        <div class="cal-frutas-tabs">${tabs}</div>
+        <div class="cal-meses">${cards}</div>
+      </div>`;
+  }).join('');
+
+  return `
+    <div class="stage" id="stage-calendario">
+      <div class="stage-hd">
+        <div class="stage-title"><span class="stage-ico">📅</span>Calendário de frutas</div>
+        <div class="stage-desc">Quando cada fruta está disponível ao longo do ano. Cores indicam o estágio: safra plena, início ou fim, plantio, entressafra.</div>
+      </div>
+      ${overview}
+      ${details}
+    </div>`;
+}
+
+function calShow(view, fruitId) {
+  document.querySelectorAll('#stage-calendario .cal-view').forEach(v => v.classList.remove('active'));
+  if (view === 'overview') {
+    document.getElementById('cal-overview').classList.add('active');
+  } else {
+    const el = document.getElementById('cal-detail-' + fruitId);
+    if (el) el.classList.add('active');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// =============================================================
 //  ENGINE · não precisa editar abaixo desta linha
 // =============================================================
 
@@ -933,6 +1483,7 @@ const NAV = [
   { t: 'stage', key: 'problema' },
   { t: 'div' },
   { t: 'lbl', text: 'Referência rápida' },
+  { t: 'fixed', id: 'calendario', nav: 'Calendário de frutas', icon: '📅' },
   { t: 'fixed', id: 'regras', nav: 'Regras operacionais', icon: '📋' },
   { t: 'fixed', id: 'expansao', nav: 'Fluxos futuros', icon: '🔮' }
 ];
@@ -1076,7 +1627,7 @@ function buildContent() {
   const stageKeys = ['primeiroContato','envioCatalogo','followupLink','confirmacao','agradecimento','entrega','posEntrega','reativacao','leadFrio','problema'];
   document.getElementById('content').innerHTML =
     stageKeys.map(k => buildStage(SCRIPTS[k])).join('') +
-    buildSuperfruta() + buildRegras() + buildExpansao();
+    buildSuperfruta() + buildCalendario() + buildRegras() + buildExpansao();
 }
 
 function show(id) {
@@ -1087,6 +1638,7 @@ function show(id) {
   const b = document.getElementById('nav-' + id);
   if (b) b.classList.add('active');
   curStage = id;
+  if (id === 'calendario') calShow('overview');
   closeSB();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
